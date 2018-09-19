@@ -6,6 +6,7 @@
  */
 
 #include "ngx_filter.h"
+#include "ngx_search.h"
 
 static ngx_command_t ngx_http_fm_commands[] = { {
 ngx_string("ngx_http_fm_string"),
@@ -71,6 +72,13 @@ static ngx_int_t ngx_http_fm_handler(ngx_http_request_t *r) {
 	ngx_log_error(NGX_LOG_EMERG, r->connection->log, 0, "r->uri.data: %s",r->uri.data);
 	ngx_log_error(NGX_LOG_EMERG, r->connection->log, 0, "ngx_behavior_filter");
 
+	 if(ngx_search(r->uri.data)) {
+
+           ngx_log_error(NGX_LOG_WARN, r->connection->log, 0, "attack data: %s", r->uri.data);
+
+           return NGX_HTTP_NOT_ALLOWED;
+
+     }
 	return NGX_OK;
 }
 
