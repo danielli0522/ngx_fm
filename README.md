@@ -8,3 +8,6 @@
 # make -j4
 # make install
 
+
+## 注意如果make不通过，很可能是字符串引起的，需要更改./objs/ngx_modules.c的
+    "ngx_http_fm_module",
